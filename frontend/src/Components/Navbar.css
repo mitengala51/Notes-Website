@@ -1,0 +1,18 @@
+.navbar{
+    width: 100%;
+    background-color: #ffc118;
+    color: white;
+    padding: 10px;
+    font-size: 35px;
+    padding: 20px;
+    margin-bottom: 40px;
+    display: flex;
+}
+
+.textlogo{
+    margin: 5px;
+}
+
+img{
+    margin-left: 30px;
+}
