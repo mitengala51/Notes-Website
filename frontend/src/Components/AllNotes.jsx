@@ -13,9 +13,6 @@ export default function
         <Note />
         <Note />
         <Note />
-        <Note />
-        <Note />
-        <Note />
     </div>
   )
 }
