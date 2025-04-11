@@ -15,3 +15,9 @@
     word-wrap: break-word;
 }
 
+.icons{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
