@@ -1,13 +1,14 @@
 import express from 'express'
 import pg from 'pg'
 import cors from 'cors'
+import 'dotenv/config'
 
 const db = new pg.Client({
-    user: "postgres",
-    host: "localhost",
-    database: "Notes-Website",
-    password: "password",
-    port: "5432"
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
 });
 
 db.connect().then(()=>{console.log("DataBase Connected")})
@@ -49,6 +50,6 @@ app.delete("/Delete-Notes", (req,res)=>{
     res.json({message: "Note Deleted Successfully"})
 });
 
-app.listen(3000, ()=>{
-    console.log("Server is Listening on port 4000")
+app.listen(process.env.PORT, ()=>{
+    console.log(`Server is Listening on port ${process.env.PORT}`)
 })
