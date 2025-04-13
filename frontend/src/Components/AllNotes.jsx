@@ -20,7 +20,7 @@ export default function AllNotes() {
     <div className='NotesList'> 
         {Notes.map((n)=>{
           return(
-            <Note key={n.id} title={n.title} note={n.note}/>
+            <Note key={n.id} id={n.id} title={n.title} note={n.note}/>
           )
         })}
     </div>
