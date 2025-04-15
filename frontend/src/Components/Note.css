@@ -13,6 +13,7 @@
     margin: 8px;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    text-align: left;
 }
 
 .icons{

@@ -1,0 +1,49 @@
+.main{
+    width: 350px;
+    height: 250px;
+    background-color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+}
+
+.Login{
+    display: flex;
+    flex-direction: column;
+}
+
+.main h1{
+    text-align: center;
+    margin-bottom: 8px;
+    margin-top: 5px;
+}
+
+span{
+    font-size: larger;
+}
+
+input{
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px gray solid;
+}
+
+button{
+    padding: 8px;
+    font-size: small;
+    background-color: #ffc118;
+    border: 0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+p{
+    text-align: center;
+}
+
+a{
+    /* color: ; */
+}
