@@ -89,7 +89,7 @@ export default function Login({ setauth }) {
         <Toaster />
 
         <p>
-          Dont have an account? <Link href="https://notes-website-amber.vercel.app/">Sign up</Link>
+          Dont have an account? <Link to="/">Sign up</Link>
         </p>
       </form>
     </div>
