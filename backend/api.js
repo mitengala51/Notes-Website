@@ -27,9 +27,7 @@ db.connect().then(() => {
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-  origin: "https://notes-website-frontend.onrender.com"
-}));
+app.use(cors());
 
 // Current User id
 var currentUserID;
