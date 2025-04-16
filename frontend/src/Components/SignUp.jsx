@@ -58,7 +58,7 @@ export default function SignUp({ setauth }) {
 
       if(result.status == 200){
         setauth(true)
-        navigate('/Notes')
+        navigate('https://notes-website-amber.vercel.app/Notes')
       }
     } catch (error) {
       console.log(error);
@@ -84,7 +84,7 @@ export default function SignUp({ setauth }) {
         <button type="submit">Submit</button>
 
         <p>
-          Already have an account? <Link href="/login">Sign in</Link>
+          Already have an account? <Link href="https://notes-website-amber.vercel.app/login">Sign in</Link>
         </p>
         <Toaster />
       </form>

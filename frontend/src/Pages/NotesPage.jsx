@@ -13,5 +13,5 @@ export default function NotesPage({ AddNote, setAddNote, auth }) {
         <TakeNotes StateAddNote={AddNote} setAddNote={setAddNote}/>
         <AllNotes AddNote={AddNote} setAddNote={setAddNote}/>
     </div> 
-  ) : <Navigate to="/login" replace />
+  ) : <Navigate to="https://notes-website-amber.vercel.app/login" replace />
 }

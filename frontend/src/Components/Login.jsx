@@ -55,7 +55,7 @@ export default function Login({ setauth }) {
       if (result.status == 200) {
         setauth(true)
         notify()
-        navigate("/Notes");
+        navigate("https://notes-website-amber.vercel.app/Notes");
       }
     } catch (err) {
 
@@ -89,7 +89,7 @@ export default function Login({ setauth }) {
         <Toaster />
 
         <p>
-          Dont have an account? <Link href="/">Sign up</Link>
+          Dont have an account? <Link href="https://notes-website-amber.vercel.app/">Sign up</Link>
         </p>
       </form>
     </div>
