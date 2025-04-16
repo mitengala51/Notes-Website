@@ -51,7 +51,7 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
     try {
       console.log("Updating Note");
 
-      const result = axios.put("http://localhost:3000/Update-Notes", {
+      const result = axios.put("https://notes-website-jjj9.onrender.com/Update-Notes", {
         id: id,
         title: UpdateForm.title,
         note: UpdateForm.note,
@@ -71,7 +71,7 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
     }
     
     try {
-      const result = await axios.delete("http://localhost:3000/Delete-Notes/" + id)
+      const result = await axios.delete("https://notes-website-jjj9.onrender.com/Delete-Notes/" + id)
       console.log(result.message);
       setAddNote(!AddNote)
     } catch (error) {
