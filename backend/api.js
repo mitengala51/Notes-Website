@@ -2,7 +2,8 @@ import express from "express";
 import pg from "pg";
 import cors from "cors";
 import "dotenv/config";
-import brcypt from 'bcrypt'
+import brcypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const db = new pg.Client({
   user: process.env.DB_USER,
@@ -11,6 +12,8 @@ const db = new pg.Client({
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
 });
+
+const secretKey = process.env.JWT_SECRET_KEY;
 
 db.connect().then(() => {
   console.log("DataBase Connected");
@@ -21,36 +24,88 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Current User id
+var currentUserID;
+
+// JWT MiddleWare
+
+// function verifyToken(req, res, next) {
+//   const token = req.header("Authorization");
+
+//   if (!token) {
+//     res.status(404).json("Token not found Access denied");
+//   }
+
+//   try {
+//     const decoded = jwt.verify(token, secretKey);
+//     req.user = decoded.user;
+//     next();
+//   } catch (error) {
+//     res.status(400).json({ error });
+//   }
+// }
+
+// Function to retrive all Notes
+
 async function AllNotes() {
-  const data = await db.query("SELECT * FROM notes");
+  console.log(currentUserID)
+  const data = await db.query("SELECT * FROM notes WHERE user_id=$1", [currentUserID]);
   console.log(data.rows);
   return data.rows;
 }
 
+// EndPoint to retrive all Notes
+
 app.get("/All-Notes", async (req, res) => {
-  const Notes = await AllNotes();
-  res.json({ message: "ALL Notes Retrivied", Notes: Notes });
+  try {
+    const Notes = await AllNotes();
+    res.json({ message: "ALL Notes Retrivied", Notes: Notes });
+  } catch (error) {
+    console.log(error);
+  }
 });
+
+// EndPoint to create note
 
 app.post("/Create-Notes", (req, res) => {
-  const { title, note } = req.body;
-  console.log(title, note);
-  db.query("INSERT INTO notes(title, note) VALUES ($1,$2)", [title, note]);
-  res.json({ message: "Notes Added Succesfully" });
+  try {
+    const { title, note } = req.body;
+    console.log(title, note);
+    db.query("INSERT INTO notes(title, note, user_id) VALUES ($1,$2, $3)", [title, note, currentUserID]);
+    res.json({ message: "Notes Added Succesfully" });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
+// EndPoint to Update Note
+
 app.put("/Update-Notes", (req, res) => {
-  const { id, title, note } = req.body;
-  console.log(id, title, note);
-  db.query("UPDATE notes SET title=$1,note=$2 WHERE id=$3", [title, note, id]);
-  res.json({ message: "Note Updated Successfully" });
+  try {
+    const { id, title, note } = req.body;
+    console.log(id, title, note);
+    db.query("UPDATE notes SET title=$1,note=$2 WHERE note_id=$3", [
+      title,
+      note,
+      id,
+    ]);
+    res.json({ message: "Note Updated Successfully" });
+  } catch (error) {
+    console.log(error);
+  }
 });
+
+// EndPoint to Delete Note
 
 app.delete("/Delete-Notes/:id", (req, res) => {
   try {
     const id = req.params.id;
     console.log(id);
-    db.query("DELETE FROM notes WHERE id=$1", [id]);
+
+    if(!id){
+      return res.status(404).json({message: "note id not found"})
+    }
+    db.query("DELETE FROM notes WHERE note_id=$1", [id]);
     res.json({ message: "Note Deleted Successfully" });
   } catch (error) {
     console.log(error);
@@ -59,33 +114,55 @@ app.delete("/Delete-Notes/:id", (req, res) => {
 
 //Login/SignUP API Endpoints
 
-app.post("/signup", async (req,res)=>{
-  const { username, password } = req.body
-  console.log(username, password)
-  const hashpassword = await brcypt.hash(password, 10)
-  console.log(hashpassword)
-  db.query("INSERT INTO users(username,password) VALUES($1, $2)", [username, hashpassword])
-  res.status(200).json({message: "Account Registered Succesfully"})
-})
+app.post("/signup", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    console.log(username, password);
+    const hashpassword = await brcypt.hash(password, 10);
+    console.log(hashpassword);
+    db.query("INSERT INTO users(username,password) VALUES($1, $2)", [
+      username,
+      hashpassword,
+    ]);
+    res.status(200).json({ message: "Account Registered Succesfully" });
 
-app.post("/login", async (req,res)=>{
-  const { username, Inputpassword } = req.body
-  console.log(username,Inputpassword)
-  if(!username){
-    res.status(404).json({message: "Username Missing"})
+    const auth = await db.query("SELECT * from users WHERE username=$1", [
+      username,
+    ]);
+    console.log(auth)
+    currentUserID = await auth.rows[0].id
+  } catch (error) {
+    console.log(error);
   }
-  const auth = await db.query("SELECT * from users WHERE username=$1",[username])
-  const Hashedpassword = auth.rows[0].password
-  brcypt.compare(Inputpassword, Hashedpassword, (error, result)=>{
-    if(error){
-      res.status(400).json({message: "Entered Wrong Password"})
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { username, Inputpassword } = req.body;
+    console.log(username, Inputpassword);
+
+    const auth = await db.query("SELECT * from users WHERE username=$1", [
+      username,
+    ]);
+
+    if(auth.rows.length == 0){
+      return res.status(405).json({message: "Username not found"})
     }
 
-    if(result){
-      res.status(200).json({message: "Logged In"})
+    const Hashedpassword = auth.rows[0].password;
+    currentUserID = await auth.rows[0].id
+    const passwordMatch = await brcypt.compare(Inputpassword, Hashedpassword)
+
+    if(passwordMatch){
+      return res.status(200).json({message: "Logged In Successfully"});
+    }else{
+      return res.status(400).json({ message: "Entered Wrong Password" });
     }
-  })
-})
+
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is Listening on port ${process.env.PORT}`);

@@ -41,8 +41,19 @@
     color: white;
     position: relative;
     left: 20%;
-    bottom: 7.5%; 
+    bottom: 8%; 
     cursor: pointer;
     padding: 5px;
+}
+
+@media (max-width: 800px) {
+
+    .takeNotes{
+        width: 65%;
+    }
+    
+    .NotesForm button{
+        bottom: 9%; 
+    }
 }
 

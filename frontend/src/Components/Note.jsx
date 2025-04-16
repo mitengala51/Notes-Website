@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 
-export default function Note({ id, title, note }) {
+export default function Note({ id, title, note, setAddNote, AddNote }) {
   const [open, setOpen] = React.useState(false);
   const [UpdateForm, setUpdateForm] = useState({
     title: "",
@@ -58,16 +58,22 @@ export default function Note({ id, title, note }) {
       });
 
       console.log(result)
+      setAddNote(!AddNote)
     } catch (error) {
       console.log(error);
     }
   }
 
   async function DeleteNote() {
-    console.log(id)
+
+    if(!id){
+      return console.log("ID not provided")
+    }
+    
     try {
       const result = await axios.delete("http://localhost:3000/Delete-Notes/" + id)
       console.log(result.message);
+      setAddNote(!AddNote)
     } catch (error) {
       console.log(error);
     }

@@ -4,7 +4,7 @@ import "./TakeNotes.css";
 import { Zoom } from "@mui/material";
 import axios from "axios";
 
-export default function TakeNotes() {
+export default function TakeNotes({ StateAddNote ,setAddNote }) {
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({
     title: "",
@@ -43,7 +43,13 @@ export default function TakeNotes() {
       note: form.note,
     });
 
+    setForm({
+      title: '',
+      note: ''
+    })
+
     console.log(data.message);
+    setAddNote(!StateAddNote)
   }
 
   return (

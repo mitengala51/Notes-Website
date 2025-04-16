@@ -20,18 +20,18 @@
     margin-top: 5px;
 }
 
-span{
+.Login span{
     font-size: larger;
 }
 
-input{
+.Login input{
     padding: 8px;
     margin-bottom: 15px;
     border-radius: 5px;
     border: 1px gray solid;
 }
 
-button{
+.Login button{
     padding: 8px;
     font-size: small;
     background-color: #ffc118;
@@ -44,6 +44,47 @@ p{
     text-align: center;
 }
 
-a{
-    /* color: ; */
+@media (max-width: 450px) {
+
+    .main{
+        width: 80%;
+        height: 270px;
+        background-color: white;
+        /* padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px; */
+        margin: 10%;
+        border-radius: 20px;
+    }
+
+    .main h1{
+        text-align: center;
+        margin-bottom: 8px;
+        margin-top: 5px;
+    }
+    
+    .Login span{
+        font-size: large;
+    }
+    
+    .Login input{
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px gray solid;
+    }
+    
+    .Login button{
+        padding: 8px;
+        font-size: small;
+        background-color: #ffc118;
+        border: 0;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+    
+    p{
+        text-align: center;
+    }
 }

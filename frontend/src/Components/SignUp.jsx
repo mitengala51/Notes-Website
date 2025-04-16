@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function SignUp() {
   const [LoginForm, setLoginForm] = useState({
@@ -9,7 +10,9 @@ export default function SignUp() {
     password: "",
   });
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const notify = () => toast.success('Logged in successfully!');
+    const error = (message) => toast.error(message);
 
   function handleUsername(e) {
     setLoginForm({
@@ -29,8 +32,22 @@ export default function SignUp() {
 
     event.preventDefault()
 
+
     console.log(LoginForm)
     try {
+
+      if(LoginForm.username=='' && LoginForm.password==''){
+        return error("Enter Email and Password")
+      }
+
+      if(LoginForm.username==''){
+        return error("Enter Email")
+      }
+
+      if(LoginForm.password==''){
+        return error("Enter Password")
+      }
+
       const result = await axios.post("http://localhost:3000/signup", {
         username: LoginForm.username,
         password: LoginForm.password,
@@ -67,6 +84,7 @@ export default function SignUp() {
         <p>
           Already have an account? <a href="/login">Sign in</a>
         </p>
+        <Toaster />
       </form>
     </div>
   );
