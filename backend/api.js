@@ -28,7 +28,9 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: ["https://notes-website-frontend.onrender.com", "https://notes-website-jjj9.onrender.com"]
+  origin: ["https://notes-website-frontend.onrender.com", "https://notes-website-jjj9.onrender.com"],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: false,
 }));
 
 // Current User id
