@@ -7,20 +7,21 @@ import NotesPage from "../Pages/NotesPage";
 export default function App() {
 
   const [AddNote, setAddNote] = useState(false)
+  const [auth, setauth] = useState(false)
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignUpPage />} />
+          <Route path="/" element={<SignUpPage setauth={setauth}/>} />
           <Route
             path="/login"
-            element={<LoginPage />}
+            element={<LoginPage setauth={setauth}/>}
           />
           <Route
             path="/Notes"
             element={
-                <NotesPage AddNote={AddNote} setAddNote={setAddNote}/>
+                <NotesPage AddNote={AddNote} setAddNote={setAddNote} auth={auth}/>
             }
           />
         </Routes>

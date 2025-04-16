@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function SignUp() {
+export default function SignUp({ setauth }) {
   const [LoginForm, setLoginForm] = useState({
     username: "",
     password: "",
@@ -56,6 +56,7 @@ export default function SignUp() {
       console.log(result.data.message)
 
       if(result.status == 200){
+        setauth(true)
         navigate('/Notes')
       }
     } catch (error) {

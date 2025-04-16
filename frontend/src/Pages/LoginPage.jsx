@@ -2,11 +2,11 @@ import React from 'react'
 import './LoginPage.css'
 import Login from '../Components/Login'
 
-function LoginPage({ assignToken }) {
+function LoginPage({ setauth }) {
 
   return (
     <div className='LoginPage' >
-      <Login assignTokenToLP={ assignToken }/>
+      <Login setauth={ setauth }/>
     </div>
   )
 }
