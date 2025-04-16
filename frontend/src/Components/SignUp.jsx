@@ -3,6 +3,7 @@ import "./Login.css";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from 'react-router-dom';
 
 export default function SignUp({ setauth }) {
   const [LoginForm, setLoginForm] = useState({
@@ -83,7 +84,7 @@ export default function SignUp({ setauth }) {
         <button type="submit">Submit</button>
 
         <p>
-          Already have an account? <a href="/login">Sign in</a>
+          Already have an account? <Link href="/login">Sign in</Link>
         </p>
         <Toaster />
       </form>

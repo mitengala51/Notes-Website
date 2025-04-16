@@ -3,6 +3,7 @@ import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from 'react-router-dom';
 
 export default function Login({ setauth }) {
   const [LoginForm, setLoginForm] = useState({
@@ -88,7 +89,7 @@ export default function Login({ setauth }) {
         <Toaster />
 
         <p>
-          Dont have an account? <a href="/">Sign up</a>
+          Dont have an account? <Link href="/">Sign up</Link>
         </p>
       </form>
     </div>
