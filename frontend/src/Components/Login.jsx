@@ -44,7 +44,7 @@ export default function Login({ setauth }) {
         return error("Password is missing")
       }
 
-      const result = await axios.post("https://notes-website-amber.vercel.app/login", {
+      const result = await axios.post("https://notes-website-frontend.onrender.com/login", {
         username: LoginForm.username,
         Inputpassword: LoginForm.password,
       });
@@ -55,7 +55,7 @@ export default function Login({ setauth }) {
       if (result.status == 200) {
         setauth(true)
         notify()
-        navigate("https://notes-website-amber.vercel.app/Notes");
+        navigate("/Notes");
       }
     } catch (err) {
 

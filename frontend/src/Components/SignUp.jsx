@@ -49,7 +49,7 @@ export default function SignUp({ setauth }) {
         return error("Enter Password")
       }
 
-      const result = await axios.post("https://notes-website-amber.vercel.app/signup", {
+      const result = await axios.post("https://notes-website-frontend.onrender.com/signup", {
         username: LoginForm.username,
         password: LoginForm.password,
       });
@@ -58,7 +58,7 @@ export default function SignUp({ setauth }) {
 
       if(result.status == 200){
         setauth(true)
-        navigate('https://notes-website-amber.vercel.app/Notes')
+        navigate('/Notes')
       }
     } catch (error) {
       console.log(error);
