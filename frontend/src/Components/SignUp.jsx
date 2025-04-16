@@ -49,7 +49,7 @@ export default function SignUp({ setauth }) {
         return error("Enter Password")
       }
 
-      const result = await axios.post("http://localhost:3000/signup", {
+      const result = await axios.post("https://notes-website-amber.vercel.app/signup", {
         username: LoginForm.username,
         password: LoginForm.password,
       });

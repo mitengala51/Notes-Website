@@ -44,7 +44,7 @@ export default function Login({ setauth }) {
         return error("Password is missing")
       }
 
-      const result = await axios.post("http://localhost:3000/login", {
+      const result = await axios.post("https://notes-website-amber.vercel.app/login", {
         username: LoginForm.username,
         Inputpassword: LoginForm.password,
       });
