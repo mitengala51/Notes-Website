@@ -49,7 +49,7 @@ export default function SignUp({ setauth }) {
         return error("Enter Password")
       }
 
-      const result = await axios.post("https://notes-website-frontend.onrender.com/signup", {
+      const result = await axios.post("https://notes-website-jjj9.onrender.com/signup", {
         username: LoginForm.username,
         password: LoginForm.password,
       });

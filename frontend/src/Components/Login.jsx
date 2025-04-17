@@ -44,7 +44,7 @@ export default function Login({ setauth }) {
         return error("Password is missing")
       }
 
-      const result = await axios.post("https://notes-website-frontend.onrender.com/login", {
+      const result = await axios.post("https://notes-website-jjj9.onrender.com/login", {
         username: LoginForm.username,
         Inputpassword: LoginForm.password,
       });
