@@ -43,11 +43,6 @@ export default function TakeNotes({ StateAddNote ,setAddNote }) {
       note: form.note,
     });
 
-    setForm({
-      title: '',
-      note: ''
-    })
-
     console.log(data.message);
     setAddNote(!StateAddNote)
   }
