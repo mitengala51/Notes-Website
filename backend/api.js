@@ -6,11 +6,11 @@ import brcypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const db = new pg.Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  // user: process.env.DB_USER,
+  // host: process.env.DB_HOST,
+  // database: process.env.DB_DATABASE,
+  // password: process.env.DB_PASSWORD,
+  // port: process.env.DB_PORT,
   connectionString: process.env.DB_URL,
 
   ssl: {
@@ -57,6 +57,9 @@ var currentUserID;
 // Function to retrive all Notes
 
 async function AllNotes() {
+  if(!currentUserID){
+    console.log("CurrentUserId not found");
+  }
   console.log(currentUserID)
   const data = await db.query("SELECT * FROM notes WHERE user_id=$1", [currentUserID]);
   console.log(data.rows);
@@ -159,7 +162,11 @@ app.post("/login", async (req, res) => {
     }
 
     const Hashedpassword = auth.rows[0].password;
-    currentUserID = await auth.rows[0].id
+    currentUserID = await auth.rows[0].id;
+    console.log(auth);
+    console.log(auth.rows[0]);
+    console.log(auth.rows[0].id);
+    console.log(currentUserID);
     const passwordMatch = await brcypt.compare(Inputpassword, Hashedpassword)
 
     if(passwordMatch){
