@@ -162,7 +162,9 @@ app.post("/login", async (req, res) => {
     }
 
     const Hashedpassword = auth.rows[0].password;
-    currentUserID = await auth.rows[0].id
+    currentUserID = await auth.rows[0].id;
+    console.log(auth.rows[0]);
+    console.log(auth.rows[0].id);
     console.log(currentUserID);
     const passwordMatch = await brcypt.compare(Inputpassword, Hashedpassword)
 
