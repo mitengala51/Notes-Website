@@ -58,7 +58,7 @@ var currentUserID;
 
 async function AllNotes() {
   if(!currentUserID){
-    return console.log("CurrentUserId not found");
+    console.log("CurrentUserId not found");
   }
   console.log(currentUserID)
   const data = await db.query("SELECT * FROM notes WHERE user_id=$1", [currentUserID]);
@@ -163,6 +163,7 @@ app.post("/login", async (req, res) => {
 
     const Hashedpassword = auth.rows[0].password;
     currentUserID = await auth.rows[0].id
+    console.log(currentUserID);
     const passwordMatch = await brcypt.compare(Inputpassword, Hashedpassword)
 
     if(passwordMatch){
