@@ -58,8 +58,8 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
       });
 
       console.log(result)
-      // setAddNote(!AddNote)
-      setAddNote(true)
+      setAddNote(!AddNote)
+      // setAddNote(true)
     } catch (error) {
       console.log(error);
     }
@@ -74,8 +74,8 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
     try {
       const result = await axios.delete("https://notes-website-jjj9.onrender.com/Delete-Notes/" + id)
       console.log(result.message);
-      // setAddNote(!AddNote)
-      setAddNote(true)
+      setAddNote(!AddNote)
+      // setAddNote(true)
     } catch (error) {
       console.log(error);
     }
