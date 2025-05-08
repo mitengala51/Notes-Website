@@ -44,7 +44,8 @@ export default function TakeNotes({ StateAddNote ,setAddNote }) {
     });
 
     console.log(data.message);
-    setAddNote(!StateAddNote)
+    // setAddNote(!StateAddNote)
+    setAddNote(true)
   }
 
   return (
