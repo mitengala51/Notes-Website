@@ -51,15 +51,15 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
     try {
       console.log("Updating Note");
 
-      const result = axios.put("https://notes-website-jjj9.onrender.com/Update-Notes", {
+      const result = await axios.put("https://notes-website-jjj9.onrender.com/Update-Notes", {
         id: id,
         title: UpdateForm.title,
         note: UpdateForm.note,
       });
 
       console.log(result)
-      // setAddNote(!AddNote)
-      setAddNote(prev => !prev);
+      setAddNote(!AddNote)
+      // setAddNote(prev => !prev);
       // setAddNote(true)
     } catch (error) {
       console.log(error);
