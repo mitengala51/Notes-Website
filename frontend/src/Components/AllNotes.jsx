@@ -10,18 +10,15 @@ export default function AllNotes({ AddNote, setAddNote }) {
   useEffect(() => {
     async function fetchData() {
       try {
-
-        if(AddNote){
         const result = await axios.get("https://notes-website-jjj9.onrender.com/All-Notes");
         setNotes(result.data.Notes);
         console.log(result.data.Notes);
-        }
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
-  }, [AddNote]);
+  });
 
   return (
     <div className="NotesList">
