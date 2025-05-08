@@ -59,8 +59,8 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
 
       console.log(result)
       // setAddNote(!AddNote)
-      // setAddNote(prev=>!prev);
-      setAddNote(true)
+      setAddNote(prev => !prev);
+      // setAddNote(true)
     } catch (error) {
       console.log(error);
     }
