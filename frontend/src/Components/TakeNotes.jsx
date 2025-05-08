@@ -37,8 +37,8 @@ export default function TakeNotes({ StateAddNote ,setAddNote }) {
   }
 
   // Send Data to API
-  function AddNote() {
-    const data = axios.post("https://notes-website-jjj9.onrender.com/Create-Notes", {
+  async function AddNote() {
+    const data = await axios.post("https://notes-website-jjj9.onrender.com/Create-Notes", {
       title: form.title,
       note: form.note,
     });
