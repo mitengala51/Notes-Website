@@ -18,7 +18,7 @@ export default function AllNotes({ AddNote, setAddNote }) {
       }
     }
     fetchData();
-  });
+  }, [AddNote]);
 
   return (
     <div className="NotesList">
