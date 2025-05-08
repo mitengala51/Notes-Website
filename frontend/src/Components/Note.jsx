@@ -47,7 +47,7 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
     console.log(UpdateForm.note);
   }
 
-  function UpdateNote() {
+  async function UpdateNote() {
     try {
       console.log("Updating Note");
 
