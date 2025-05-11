@@ -34,8 +34,6 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
       ...UpdateForm,
       title: e.target.value,
     });
-
-    console.log(UpdateForm.title);
   }
 
   function ChangeNote(e) {
@@ -43,21 +41,16 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
       ...UpdateForm,
       note: e.target.value,
     });
-
-    console.log(UpdateForm.note);
   }
 
   async function UpdateNote() {
     try {
-      console.log("Updating Note");
-
       const result = await axios.put("https://notes-website-jjj9.onrender.com/Update-Notes", {
         id: id,
         title: UpdateForm.title,
         note: UpdateForm.note,
       });
-
-      console.log(result)
+      
       setAddNote(!AddNote)
       // setAddNote(prev => !prev);
       // setAddNote(true)
@@ -74,7 +67,6 @@ export default function Note({ id, title, note, setAddNote, AddNote }) {
     
     try {
       const result = await axios.delete("https://notes-website-jjj9.onrender.com/Delete-Notes/" + id)
-      console.log(result.message);
       setAddNote(!AddNote)
       // setAddNote(true)
     } catch (error) {
