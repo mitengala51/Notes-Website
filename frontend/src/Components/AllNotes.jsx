@@ -12,7 +12,6 @@ export default function AllNotes({ AddNote, setAddNote }) {
       try {
         const result = await axios.get("https://notes-website-jjj9.onrender.com/All-Notes");
         setNotes(result.data.Notes);
-        console.log(result.data.Notes);
       } catch (error) {
         console.log(error);
       }
