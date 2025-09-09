@@ -30,8 +30,6 @@ export default function Login({ setauth }) {
   }
 
   async function handleSubmit(event) {
-
-    console.log(LoginForm);
     try {
 
       event.preventDefault();
@@ -48,9 +46,6 @@ export default function Login({ setauth }) {
         username: LoginForm.username,
         Inputpassword: LoginForm.password,
       });
-
-      console.log(result);
-
 
       if (result.status == 200) {
         setauth(true)

@@ -22,8 +22,6 @@ export default function TakeNotes({ StateAddNote ,setAddNote }) {
       ...form,
       title: e.target.value,
     });
-
-    console.log(form.title);
   }
 
   // Form Note Input
@@ -32,19 +30,18 @@ export default function TakeNotes({ StateAddNote ,setAddNote }) {
       ...form,
       note: e.target.value,
     });
-
-    console.log(form.note);
   }
 
   // Send Data to API
-  function AddNote() {
-    const data = axios.post("https://notes-website-jjj9.onrender.com/Create-Notes", {
+  async function AddNote() {
+    const data = await axios.post("https://notes-website-jjj9.onrender.com/Create-Notes", {
       title: form.title,
       note: form.note,
     });
-
-    console.log(data.message);
+    
     setAddNote(!StateAddNote)
+    // setAddNote(prev => !prev)
+    // setAddNote(true)
   }
 
   return (

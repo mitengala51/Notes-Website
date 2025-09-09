@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link } from 'react-router-dom';
 
 export default function SignUp({ setauth }) {
-  const [LoginForm, setLoginForm] = useState({
+  const [SignUpForm, setSignUpForm] = useState({
     username: "",
     password: "",
   });
@@ -16,45 +16,41 @@ export default function SignUp({ setauth }) {
     const error = (message) => toast.error(message);
 
   function handleUsername(e) {
-    setLoginForm({
-      ...LoginForm,
+    setSignUpForm({
+      ...SignUpForm,
       username: e.target.value,
     });
   }
 
   function handlePassword(e) {
-    setLoginForm({
-      ...LoginForm,
+    setSignUpForm({
+      ...SignUpForm,
       password: e.target.value,
     });
   }
 
   async function handleSubmit(event) {
 
-    event.preventDefault()
-
-
-    console.log(LoginForm)
+    event.preventDefault();
+    
     try {
 
-      if(LoginForm.username=='' && LoginForm.password==''){
+      if(SignUpForm.username=='' && SignUpForm.password==''){
         return error("Enter Email and Password")
       }
 
-      if(LoginForm.username==''){
+      if(SignUpForm.username==''){
         return error("Enter Email")
       }
 
-      if(LoginForm.password==''){
+      if(SignUpForm.password==''){
         return error("Enter Password")
       }
 
       const result = await axios.post("https://notes-website-jjj9.onrender.com/signup", {
-        username: LoginForm.username,
-        password: LoginForm.password,
+        username: SignUpForm.username,
+        password: SignUpForm.password,
       });
-
-      console.log(result.data.message)
 
       if(result.status == 200){
         setauth(true)

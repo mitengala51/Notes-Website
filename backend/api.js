@@ -146,13 +146,13 @@ app.post("/signup", async (req, res) => {
       username,
       hashpassword,
     ]);
-    res.status(200).json({ message: "Account Registered Succesfully" });
 
     const auth = await db.query("SELECT * from users WHERE username=$1", [
       username,
     ]);
     console.log(auth)
     currentUserID = await auth.rows[0].id
+    res.status(200).json({ message: "Account Registered Succesfully" });
   } catch (error) {
     console.log(error);
   }
