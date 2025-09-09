@@ -6,11 +6,11 @@ import brcypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const db = new pg.Client({
-  // user: process.env.DB_USER,
-  // host: process.env.DB_HOST,
-  // database: process.env.DB_DATABASE,
-  // password: process.env.DB_PASSWORD,
-  // port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
   connectionString: process.env.DB_URL,
 
   ssl: {
@@ -18,11 +18,21 @@ const db = new pg.Client({
   }
 });
 
+// const db = new pg.Client({
+//    user: "postgres",
+//    host: "localhost",
+//   database: "Notes-Website",
+//   password: "password",
+//   port: 5432,
+// })
+
 const secretKey = process.env.JWT_SECRET_KEY;
 
 db.connect().then(() => {
   console.log("DataBase Connected");
-});
+}).catch((err)=>{ 
+  console.log("DB Error: ", err)
+ });
 
 const app = express();
 

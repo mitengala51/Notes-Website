@@ -64,6 +64,7 @@ export default function Login({ setauth }) {
       }else if(err.status == 405){
         error("Email is incorrect")
       }else{
+        console.log(err)
         error("Something Went Wrong")
       }
     }
